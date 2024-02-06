@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Diretório onde as imagens a serem convertidas estão:
+SOURCE_DIR="$HOME/Downloads/img"
+
+# Diretório onde as imagens WebP serão salvas
+TARGET_DIR="$HOME/Downloads/img-webp"
+
+# Cria o diretório de destino se ele não existir
+mkdir -p "$TARGET_DIR"
+
+# Define parâmetros padrão para o cwebp
+PARAMS=(-m 6 -q 70 -mt -af -progress)
+
+# Substitui PARAMS se argumentos forem passados para o script
+if [ $# -ne 0 ]; then
+        PARAMS=("$@")
+fi
+
+# Ativa opções para tratar nomes de arquivo e extensões de forma apropriada
+shopt -s nullglob nocaseglob extglob
+
+# Corrige o loop para iterar corretamente sobre os arquivos no SOURCE_DIR
+for FILE in "$SOURCE_DIR"/*.@(jpg|jpeg|tif|tiff|png); do
+    # Corrige o comando cwebp para usar TARGET_DIR e manipular corretamente os parâmetros e o nome do arquivo de saída
+    BASENAME=$(basename "$FILE")
+    cwebp "${PARAMS[@]}" "$FILE" -o "$TARGET_DIR/${BASENAME%.*}.webp"
+done

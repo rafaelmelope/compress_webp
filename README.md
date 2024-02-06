@@ -1,4 +1,4 @@
-# WEBP image batch converter.
+# BASH WEBP image batch converter.
 
 O WebP é um formato de imagem moderno que proporciona compactação superior sem perdas e com perdas para imagens na Web. Com ele, webmasters e desenvolvedores da Web podem criar imagens menores e mais avançadas que tornam a Web mais rápida. https://developers.google.com/speed/webp?hl=pt-br
 
